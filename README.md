@@ -7,6 +7,7 @@ This repotistory conatains code to control the superlotis NUV-optimized CCD SOPH
 This uses client-server architecture. 
 It runs on the camera computer (server), and the camera commands can be accessed remotely from the main (client) computer.
 
+![server-client](server_client_architecture.png)
 ## Installation/requirements
 
 # Setting up computer:
