@@ -1,42 +1,15 @@
 # superlotis_camera_control
 Sophia camera control for Superlotis
 
-This repotistory conatains code to control the superlotis NUV-optimized CCD SOPHIA BUV 2048 camera. 
+This repository conatains code to control the superlotis NUV-optimized CCD SOPHIA BUV 2048 camera. 
 
 ## Description:
 This uses client-server architecture. 
 It runs on the camera computer (server), and the camera commands can be accessed remotely from the main (client) computer.
 
 ![server-client](server_client_architecture.png)
-## Installation/requirements
 
-# Setting up computer:
-Note: PICam only works on Centos7. Apparently, some people have been able to get it working on other operating systems, but they are not officially supported. 
-# Centos7 installation (gnome desktop, x86_64):
-
-# Applications to install on centos7:
-1. Anydesk
-   - (Removing ads on Anydesk)[https://www.reddit.com/r/AnyDesk/comments/11q6v5j/personal_use_being_annoyed_by_forcedwait_popups/]
-3. C++
-   - Install cmake
-4. VScode
-  - Need GLIBCXX version 3.4.25, and GLIBC 2.28 as discussed in vscode requirements. To get available GLIBCXX versions: ‘strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX’, and current GLIBC version: ‘rpm -q glibc’
-  - It is necessary to install a previous version of vscode, listed [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions). I used version 1.25 (june 2018), [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions)
-  - [Also, it is *necessary* to opt out of vscode auto updates.](https://code.visualstudio.com/docs/supporting/FAQ#:~:text=You%20can%20install%20a%20previous,a%20specific%20release%20notes%20page)
-4. ds9
-   - run ./ds9 in appropriate folder
-5. Chromium
-  - centos7 is no longer supported by chromium, make [changes outlined here](https://serverfault.com/questions/904304/could-not-resolve-host-mirrorlist-centos-org-centos-7)
-6. Firefox
-
-# Picam Installation:
-1. Downloaded picam_sdk.run file
-2. Make picam_sdk executable, then executed it (command line), discussed [here](https://askubuntu.com/questions/18747/how-do-i-install-run-files)
-3. Afters file runs, [configure the firewall to allow all traffic through the ethernet adaptor](https://docs.redhat.com/en/documentation/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html#sec-Getting_started_with_firewalld)
-
-To run vscode, type 'code' into the command line
-
-# Camera control files
+### Camera control files
 1. camera.cpp: all camera control commands
    - camera.h: access camera.cpp variables in server.c
 2. server.c: defines commands that you can use in another computer, through socket connection
@@ -45,3 +18,68 @@ To run vscode, type 'code' into the command line
    - Note: server.c and camserver.c can be merged - this may be a good option in the future
 4. makefile: compiles and runs camera.cpp, server.c, camserver.c
    - generates ./bin/camserver_cit (executable)
+
+### Basic usage
+#### server: open and initialize camera
+```bash
+cd /opt/PrincetonInstruments/picam/samples/server-client #cd to folder containing makefile, 
+make #compile server script, generate executable
+./bin/camserver_cit #run executable to start server and initialize camera
+```
+
+#### client: send commands to camera computer
+in a new terminal window: 
+setter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972`
+getter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972`
+expose: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972`
+
+#### client commands:
+```
+exptime [arg: 0 - 240000 ms] #set/get exposure time
+exit 
+help
+shutter_mode [arg: 1, 2, 3] #set/get shutter mode
+analog_gain [arg: 0, 1, 2, 3] #set/get adc analog gain
+temp [arg: -80 to 90 Celcius] #check values #set/get camera temperature
+burst #take a series of exposures in short succession
+expose #take an exposure image
+bias #take a bias image
+dark #take a dark image
+status #get exposure status information (idle, currently exposing, reading out, writing out
+genfits #generate fits file from raw
+```
+
+
+## Installation/requirements
+
+### Pre-requisites:
+* CentOS 7
+* Picam SDK v5.15.11 
+* cfitsio 4.4.1
+* c++11 (2011 version)
+* python 2.7.5
+* gcc 4.8.5 (Red Hat 4.8.5-44)
+
+### Setting up computer:
+Note: PICam only works on Centos7. Apparently, some people have been able to get it working on other operating systems, but they are not officially supported. 
+
+### Useful applications:
+1. Anydesk
+2. VScode
+  - It is necessary to install a previous version of vscode, listed [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions). I used version 1.25 (june 2018), [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions)
+  - [Also, it is *necessary* to opt out of vscode auto updates.](https://code.visualstudio.com/docs/supporting/FAQ#:~:text=You%20can%20install%20a%20previous,a%20specific%20release%20notes%20page)
+4. ds9
+
+### Picam Installation:
+1. Download picam_sdk.run file [linked here](https://cdn.princetoninstruments.com/picam/picam_sdk.run)
+2. Make picam_sdk executable, then executed it (command line), discussed [here](https://askubuntu.com/questions/18747/how-do-i-install-run-files)
+3. After file runs, configure the firewall to allow all traffic through the ethernet adaptor, discussed [here](https://docs.redhat.com/en/documentation/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Firewalls.html#sec-Getting_started_with_firewalld)
+
+### Installing the code
+First, clone this repository to your machine
+```bash
+git clone https://github.com/Hamden-Lab/superlotis_camera_control.git
+cd /opt/PrincetonInstruments/picam/samples/server-client && make
+```
+
+
