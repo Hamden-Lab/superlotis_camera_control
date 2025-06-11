@@ -1,6 +1,12 @@
 # superlotis_camera_control
 Sophia camera control for Superlotis
 
+This repotistory conatains code to control the superlotis NUV-optimized CCD SOPHIA BUV 2048 camera. 
+
+## Description:
+This uses client-server architecture. 
+It runs on the camera computer (server), and the camera commands can be accessed remotely from the main (client) computer.
+
 ## Installation/requirements
 
 # Setting up computer:
