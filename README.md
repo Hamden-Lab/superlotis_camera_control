@@ -81,6 +81,6 @@ First, clone this repository to your machine
 ```bash
 git clone https://github.com/Hamden-Lab/superlotis_camera_control.git
 cd /opt/PrincetonInstruments/picam/samples/server-client && make
+./bin/camserver_cit
 ```
-
 
