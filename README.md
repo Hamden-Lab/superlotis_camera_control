@@ -10,31 +10,32 @@ It runs on the camera computer (server), and the camera commands can be accessed
 ![server-client](server_client_architecture.png)
 
 ### Camera control files
-1. camera.cpp: all camera control commands
+* camera.cpp: all camera control commands
    - camera.h: access camera.cpp variables in server.c
-2. server.c: defines commands that you can use in another computer, through socket connection
+* server.c: defines commands that you can use in another computer, through socket connection
    - server.h: connects server.c, camserver.c, camera.cpp
-3. camserver.c: runs server.c in loop
-   - Note: server.c and camserver.c can be merged - this may be a good option in the future
-4. makefile: compiles and runs camera.cpp, server.c, camserver.c
+* camserver.c: runs server.c in loop
+* makefile: compiles and runs camera.cpp, server.c, camserver.c
    - generates ./bin/camserver_cit (executable)
 
 ### Basic usage
-#### server: open and initialize camera
+server: open and initialize camera
 ```bash
-cd /opt/PrincetonInstruments/picam/samples/server-client #cd to folder containing makefile, 
+cd /opt/PrincetonInstruments/picam/samples/server-client #cd to folder containing makefile
 make #compile server script, generate executable
 ./bin/camserver_cit #run executable to start server and initialize camera
 ```
 
-#### client: send commands to camera computer
-in a new terminal window: 
-- setter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972`
-- getter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972`
-- expose: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972`
+client: send commands to camera computer
+
+```bash
+cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972 #setter
+cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972 #getter
+cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972 #expose
+````
 
 #### client commands:
-```
+```bash
 exptime [arg: 0 - 240000 ms] #set/get exposure time
 exit 
 help
@@ -66,9 +67,9 @@ Note: PICam only works on Centos7. Apparently, some people have been able to get
 ### Useful applications:
 1. Anydesk
 2. VScode
-  - It is necessary to install a previous version of vscode, listed [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions). I used version 1.25 (june 2018), [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions)
-  - [Also, it is *necessary* to opt out of vscode auto updates.](https://code.visualstudio.com/docs/supporting/FAQ#:~:text=You%20can%20install%20a%20previous,a%20specific%20release%20notes%20page)
-4. ds9
+   > Version 1.25 (2018) is compatable with CentOS7 linked [here](https://code.visualstudio.com/docs/supporting/faq#_previous-release-versions).
+   > Opt out of VScode auto-updates [here](https://code.visualstudio.com/docs/supporting/FAQ#:~:text=You%20can%20install%20a%20previous,a%20specific%20release%20notes%20page)
+3. SAOImage DS9
 
 ### Picam Installation:
 1. Download picam_sdk.run file [linked here](https://cdn.princetoninstruments.com/picam/picam_sdk.run)
