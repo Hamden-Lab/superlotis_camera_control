@@ -29,9 +29,9 @@ make #compile server script, generate executable
 
 #### client: send commands to camera computer
 in a new terminal window: 
-setter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972`
-getter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972`
-expose: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972`
+- setter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972`
+- getter: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972`
+- expose: `cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972`
 
 #### client commands:
 ```
