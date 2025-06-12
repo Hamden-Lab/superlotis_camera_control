@@ -21,7 +21,7 @@ It runs on the camera computer (server), and the camera commands can be accessed
 ### Basic usage
 server: open and initialize camera
 ```bash
-cd /opt/PrincetonInstruments/picam/samples/server-client #cd to folder containing makefile
+cd /opt/PrincetonInstruments/picam/ #cd to folder containing makefile
 make #compile server script, generate executable
 ./bin/camserver_cit #run executable to start server and initialize camera
 ```
@@ -29,9 +29,9 @@ make #compile server script, generate executable
 client: send commands to camera computer
 
 ```bash
-cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]=[arg]| nc localhost 6972 #setter
-cd /opt/PrincetonInstruments/picam/samples/server-client && echo [cmd]| nc localhost 6972 #getter
-cd /opt/PrincetonInstruments/picam/samples/server-client && echo expose| nc localhost 6972 #expose
+cd /opt/PrincetonInstruments/picam/ && echo [cmd]=[arg]| nc localhost 6972 #setter
+cd /opt/PrincetonInstruments/picam/ && echo [cmd]| nc localhost 6972 #getter
+cd /opt/PrincetonInstruments/picam/ && echo expose| nc localhost 6972 #expose
 ````
 
 #### client commands:
@@ -80,7 +80,7 @@ Note: PICam only works on Centos7. Apparently, some people have been able to get
 First, clone this repository to your machine
 ```bash
 git clone https://github.com/Hamden-Lab/superlotis_camera_control.git
-cd /opt/PrincetonInstruments/picam/samples/server-client && make
+cd /opt/PrincetonInstruments/picam/ && make
 ./bin/camserver_cit
 ```
 
