@@ -21,7 +21,7 @@ It runs on the camera computer (server), and the camera commands can be accessed
 ### Basic usage
 server: open and initialize camera
 ```bash
-cd /opt/PrincetonInstruments/picam/ #cd to folder containing makefile
+cd /opt/PrincetonInstruments/picam/[path/to/file] #cd to folder containing makefile
 make #compile server script, generate executable
 ./bin/camserver_cit #run executable to start server and initialize camera
 ```
@@ -29,9 +29,9 @@ make #compile server script, generate executable
 client: send commands to camera computer
 
 ```bash
-cd /opt/PrincetonInstruments/picam/ && echo [cmd]=[arg]| nc localhost 6972 #setter
-cd /opt/PrincetonInstruments/picam/ && echo [cmd]| nc localhost 6972 #getter
-cd /opt/PrincetonInstruments/picam/ && echo expose| nc localhost 6972 #expose
+cd /opt/PrincetonInstruments/picam/[path/to/file] && echo [cmd]=[arg]| nc localhost 6972 #setter
+cd /opt/PrincetonInstruments/picam/[path/to/file] && echo [cmd]| nc localhost 6972 #getter
+cd /opt/PrincetonInstruments/picam/[path/to/file] && echo expose| nc localhost 6972 #expose
 ````
 
 #### client commands:
