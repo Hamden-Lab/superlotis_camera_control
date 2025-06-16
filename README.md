@@ -18,7 +18,11 @@ It runs on the camera computer (server), and the camera commands can be accessed
 * makefile: compiles and runs camera.cpp, server.c, camserver.c
    - generates ./bin/camserver_cit (executable)
 
-The camera.cpp file defines camera commands (expose, bias, dark, getters/setters for temp, gain, exposure time, shutter mode). Then, camserver.c and server.c allow you to create the "server" side of the server/client infrastructure. The makefile compiles camera.cpp, camserver.c, and server.c, and then generates an executable file (./bin/camserver_cit). (You might need to create folders called "bin" and "obj".) Instead of running these as seperate commands, you can just run the bash file, server.sh.
+### Server-client setup
+The camera.cpp file defines camera commands (expose, bias, dark, getters/setters for temp, gain, exposure time, shutter mode). Then, camserver.c and server.c allow you to create the "server" side of the server/client infrastructure. The makefile compiles camera.cpp, camserver.c, and server.c, and then generates an executable file (./bin/camserver_cit), which initializes the camera, and opens the server.
+(You might need to create folders called "bin" and "obj".) Instead of running these as seperate commands, you can just run the bash file, server.sh. The makefile only needs to be run once. 
+
+Once the server is running (run ./camserver_cit in terminal) on the superlotis computer, you can send commands from the client computer. To communicate between the different computers, you will eventually need two seperate python scripts, one on each computer. See sample python scripts (server_testing.py and client_testing.py). 
 
 ### Basic usage
 server: open and initialize camera
