@@ -1,7 +1,7 @@
 # superlotis_camera_control
 Sophia camera control for Superlotis
 
-This repository conatains code to control the superlotis NUV-optimized CCD SOPHIA BUV 2048 camera. 
+This repository contains code to control the superlotis NUV-optimized CCD SOPHIA BUV 2048 camera. 
 
 ## Description:
 This uses client-server architecture. 
