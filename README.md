@@ -18,6 +18,8 @@ It runs on the camera computer (server), and the camera commands can be accessed
 * makefile: compiles and runs camera.cpp, server.c, camserver.c
    - generates ./bin/camserver_cit (executable)
 
+The camera.cpp file defines camera commands (expose, bias, dark, getters/setters for temp, gain, exposure time, shutter mode). Then, camserver.c and server.c allow you to create the "server" side of the server/client infrastructure. The makefile compiles camera.cpp, camserver.c, and server.c, and then generates an executable file (./bin/camserver_cit). (You might need to create folders called "bin" and "obj".) 
+
 ### Basic usage
 server: open and initialize camera
 ```bash
